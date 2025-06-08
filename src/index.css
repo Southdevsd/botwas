@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 50% 5%;
+    --foreground: 180 100% 90%;
+
+    --card: 210 50% 8%;
+    --card-foreground: 180 100% 90%;
+
+    --popover: 210 50% 6%;
+    --popover-foreground: 180 100% 90%;
+
+    --primary: 180 100% 50%;
+    --primary-foreground: 210 50% 5%;
+
+    --secondary: 210 30% 15%;
+    --secondary-foreground: 180 100% 90%;
+
+    --muted: 210 30% 12%;
+    --muted-foreground: 180 30% 65%;
+
+    --accent: 195 100% 50%;
+    --accent-foreground: 210 50% 5%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 180 100% 90%;
+
+    --border: 180 50% 20%;
+    --input: 210 30% 12%;
+    --ring: 180 100% 50%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(0, 150, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(0, 255, 200, 0.05) 0%, transparent 50%),
+      linear-gradient(135deg, #0a0f1c 0%, #1a1f2e 30%, #0f1419 70%, #1e293b 100%);
+    min-height: 100vh;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 100px 100px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@layer components {
+  .hover-scale {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(0,255,255,0.3)];
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent;
+  }
+
+  .neon-border {
+    @apply border border-cyan-500/30 shadow-[0_0_15px_rgba(0,255,255,0.2)];
+  }
+
+  .neon-glow {
+    @apply shadow-[0_0_20px_rgba(0,255,255,0.4),0_0_40px_rgba(0,255,255,0.2),0_0_80px_rgba(0,255,255,0.1)];
+  }
+
+  .cyber-card {
+    @apply bg-black/60 backdrop-blur-md border border-cyan-500/20 rounded-lg shadow-[0_0_25px_rgba(0,255,255,0.1)] relative overflow-hidden;
+  }
+
+  .cyber-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.8), transparent);
+    animation: scan 3s infinite;
+  }
+
+  .cyber-button {
+    @apply bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/50 text-cyan-100 font-semibold py-2 px-4 rounded-lg transition-all duration-300 hover:from-cyan-400/30 hover:to-blue-400/30 hover:border-cyan-300 hover:shadow-[0_0_20px_rgba(0,255,255,0.4)] hover:text-white;
+  }
+
+  .cyber-input {
+    @apply bg-black/40 border border-cyan-500/30 rounded-lg px-4 py-2 text-cyan-100 placeholder-cyan-400/60 focus:border-cyan-400 focus:shadow-[0_0_15px_rgba(0,255,255,0.3)] focus:outline-none transition-all duration-300;
+  }
+}
+
+@keyframes scan {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes glow {
+  0%, 100% { 
+    text-shadow: 
+      0 0 5px rgba(0, 255, 255, 0.5),
+      0 0 10px rgba(0, 255, 255, 0.3),
+      0 0 15px rgba(0, 255, 255, 0.2);
+  }
+  50% { 
+    text-shadow: 
+      0 0 10px rgba(0, 255, 255, 0.8),
+      0 0 20px rgba(0, 255, 255, 0.5),
+      0 0 30px rgba(0, 255, 255, 0.3);
+  }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
